@@ -6,6 +6,8 @@ package SIUnits
 
   type Length = Real (final quantity = "Length", final unit = "m");
   type PipeLength = Length(min=0);
+  type Velocity = Real (final quantity = "Velocity", final unit = "m/s");
+  type Acceleration = Real (final quantity = "Acceleration", final unit = "m/s2")
   
   //Energy
 
@@ -22,6 +24,7 @@ package SIUnits
   type Volume = Real (final quantity = "Volume", final unit = "m3");
   type VolumeFlow = Real (final quantity = "Volume Flow", final unit = "m3/s");
   type Density = Real (final quantity = "Density", final unit = "kg/m3");
+  type WaterFlow = Real (final quantity = "Water Flow", final unit = "L/s");
 
 
   //Thermodynamics
@@ -31,8 +34,8 @@ package SIUnits
 				   min = 0.0,
 				   start = 288.15);
   type Heat = Real (final quantity="Heat", final unit="J");
-  type HeatFlowRate = Real (final quantity="Power", final unit="W");
-  type HeatFlux = Real (final quantity="HeatFlux", final unit="W/m2");
+  type HeatFlow = Real (final quantity="Heat Flow", final unit="W");
+  type HeatFlux = Real (final quantity="Heat Flux", final unit="W/m2");
   type DensityOfHeatFlowRate = Real (final quantity="DensityOfHeatFlowRate",
 				    final unit="W/m2");
   type CoefficientOfHeatTransfer = Real (final quantity="CoefficientOfHeatTransfer",
