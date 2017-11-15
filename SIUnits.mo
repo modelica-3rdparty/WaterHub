@@ -7,13 +7,13 @@ package SIUnits
   type Length = Real (final quantity = "Length", final unit = "m");
   type PipeLength = Length(min=0);
   type Velocity = Real (final quantity = "Velocity", final unit = "m/s");
-  type Acceleration = Real (final quantity = "Acceleration", final unit = "m/s2")
+  type Acceleration = Real (final quantity = "Acceleration", final unit = "m/s2");
   
   //Energy
 
   type Energy = Real (final quantity = "Energy", final unit = "J");
-  type EnergyFlow = Real (final Quantity = "Energy Flow", final unit = "J/s");
-  type Power = Real (final Quantity = "Power", final unit = "W");
+  type EnergyFlow = Real (final quantity = "Energy Flow", final unit = "J/s");
+  type Power = Real (final quantity = "Power", final unit = "W");
   type EnergyDensity = Real (final quantity = "Energy", final unit = "J/m3");
 
 

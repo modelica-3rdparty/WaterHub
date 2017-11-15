@@ -26,5 +26,5 @@ package Constants
   final constant Real mue_0(final unit="N/A2") = 4*pi*1.e-7 "Magnetic constant";
   final constant Real epsilon_0(final unit="F/m") = 1/(mue_0*c*c)
     "Electric constant";
-  final constant Real VolSpecificHeatCapWater = 3185.5 "Volumetric Specific Heat of Water"
+  final constant Real VolSpecificHeatCapWater = 4185.5 "Volumetric Specific Heat of Water";
 end Constants;
