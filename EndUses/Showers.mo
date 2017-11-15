@@ -5,27 +5,32 @@ package Showers
   import CO = WaterHub.Constants;
  
   model SimpleShower
-    WaterHub.BaseClasses.WaterPort inletCold;
-    WaterHub.BaseClasses.WaterPort inletHot;
-  //  WaterHub.BaseClasses.Port outlet;
-  //  SI.HeatFlow heat_inlet;
-  //  SI.HeatFlow heat_outlet;
-  //  SI.AbsoluteTemperature T_outlet;
-    parameter SI.AbsoluteTemperature T_wanted = 299;
+    WaterHub.BaseClasses.WaterPort inletCold(water(min=0));
+    WaterHub.BaseClasses.WaterPort inletHot(water(min=0));
+    WaterHub.BaseClasses.WaterPort outlet(water(max=0));
+    WaterHub.BaseClasses.HeatPort heat_in(heat(min=0));
+
+    parameter SI.AbsoluteTemperature T_wanted = 310;
     SI.AbsoluteTemperature T_achieved;
+    SI.AbsoluteTemperature T_preheatedCold "Temperature of the preheated cold water";
     parameter SI.WaterFlow water_wanted = 0.3;
-  //  parameter Real lossParameter=0.1;
+  
   algorithm
-    if T_wanted < inletCold.T then
+    if T_wanted < inletCold.T then   //Make sure wanted T is inside the boundary set by Hot and Cold Water
       T_achieved := inletCold.T;
     elseif T_wanted > inletHot.T then  
       T_achieved := inletHot.T;
     else
       T_achieved := T_wanted;
     end if;
+  
   equation
-    water_wanted = inletCold.water+inletHot.water;
-    T_achieved*water_wanted = inletCold.T*inletCold.water+inletHot.T*inletHot.water;
+    outlet.water = -water_wanted;
+    -outlet.water = inletCold.water+inletHot.water;
+    T_preheatedCold*inletCold.water = inletCold.T*inletCold.water + (heat_in.heat/CO.VolSpecificHeatCapWater);
+    T_achieved*outlet.water = T_preheatedCold*inletCold.water+inletHot.T*inletHot.water;
+    outlet.T = T_achieved;
+      
   end SimpleShower;
 
 end Showers;

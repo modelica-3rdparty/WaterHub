@@ -8,5 +8,9 @@ package BaseClasses
     flow SI.WaterFlow water;
     SI.AbsoluteTemperature T;
   end WaterPort;
-  
+
+  connector HeatPort
+    flow SI.HeatFlow heat;
+  end HeatPort;  
+
 end BaseClasses;
