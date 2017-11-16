@@ -7,6 +7,8 @@ package WaterSupply
   end InfiniteSupply;
 
 
-
+  model EndlessSink "Endless sink"
+    WaterHub.BaseClasses.WaterPort inlet;
+  end EndlessSink;
 
 end WaterSupply;

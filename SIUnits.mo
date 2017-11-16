@@ -33,6 +33,8 @@ package SIUnits
 				   final unit = "K",
 				   min = 0.0,
 				   start = 288.15);
+  type TemperatureDifference = Real (final quantity = "Temperature Difference", 
+                final unit = "K", min = 0.0);
   type Heat = Real (final quantity="Heat", final unit="J");
   type HeatFlow = Real (final quantity="Heat Flow", final unit="W");
   type HeatFlux = Real (final quantity="Heat Flux", final unit="W/m2");
