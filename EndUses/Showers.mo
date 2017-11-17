@@ -5,6 +5,7 @@ package Showers
   import CO = WaterHub.Constants;
  
   model SimpleShower
+    extends WaterHub.Icons.Package;
     WaterHub.BaseClasses.WaterPort inletCold(water(min=0));
     WaterHub.BaseClasses.WaterPort inletHot(water(min=0));
     WaterHub.BaseClasses.WaterPort outlet(water(max=0));
@@ -34,10 +35,15 @@ package Showers
   end SimpleShower;
 
 
+
   model NotSoSimpleShower
-    WaterHub.BaseClasses.WaterPort inletCold(water(min=0));
-    WaterHub.BaseClasses.WaterPort inletHot(water(min=0));
-    WaterHub.BaseClasses.WaterPort outlet(water(max=0));
+    extends WaterHub.Icons.Package;
+    WaterHub.BaseClasses.WaterPort_in inletCold(water(min=0))
+    annotation (Placement(transformation(extent={{-110,-30},{-90,-10}})));
+    WaterHub.BaseClasses.WaterPort_in inletHot(water(min=0))
+    annotation (Placement(transformation(extent={{-110,10},{-90,30}})));
+    WaterHub.BaseClasses.WaterPort_out outlet(water(max=0))
+    annotation (Placement(transformation(extent={{110,-10},{90,10}})));
 
     parameter SI.AbsoluteTemperature T_wanted = 310;
     SI.AbsoluteTemperature T_achieved;
@@ -58,5 +64,9 @@ package Showers
     outlet.water + inletCold.water+inletHot.water = 0;
     outlet.T = T_achieved;  
   end NotSoSimpleShower;
+
+
+
+
 
 end Showers;
