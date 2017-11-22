@@ -10,8 +10,4 @@ package WaterSupply
     outlet.T = T;
   end InfiniteSupply;
 
-
-
-
-
 end WaterSupply;

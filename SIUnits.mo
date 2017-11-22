@@ -21,8 +21,8 @@ package SIUnits
 
   type Mass = Real (final quantity = "Mass", final unit = "kg");
   type MassFlow = Real (final quantity = "Mass Flow", final unit = "kg/s");
-  type Volume = Real (final quantity = "Volume", final unit = "m3");
-  type VolumeFlow = Real (final quantity = "Volume Flow", final unit = "m3/s");
+  type Volume = Real (final quantity = "Volume", final unit = "L");
+  type VolumeFlow = Real (final quantity = "Volume Flow", final unit = "L/s");
   type Density = Real (final quantity = "Density", final unit = "kg/m3");
   type WaterFlow = Real (final quantity = "Water Flow", final unit = "L/s");
 
