@@ -1,13 +1,6 @@
 WaterHub Package
 ================
 
-.. toctree::
-   :maxdepth: 2
-
-   includeFile
-
-.. :caption: Contents:
-
 Description
 -----------
 
@@ -20,3 +13,11 @@ The WaterHub Package is a Modelica package inspired from the Modelica.Fluid libr
 * Pipes & Carriers
 
 This package is still under construction, more to come...
+
+
+.. toctree::
+   :maxdepth: 2
+
+   includeFile
+
+.. :caption: Contents:
