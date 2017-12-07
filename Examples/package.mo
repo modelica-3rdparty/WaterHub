@@ -1,10 +1,10 @@
 within WaterHub;
 
 package Examples
-  extends WaterHub.Icons.ExamplesPackage;
+  extends Modelica.Icons.ExamplesPackage;
 
   model SimpleShowerAndHE
-    extends WaterHub.Icons.Example;
+    extends Modelica.Icons.Example;
     WaterHub.Supply.WaterSupply.InfiniteSupply coldFlow(outlet.T=283.15);
     WaterHub.Supply.WaterSupply.InfiniteSupply hotFlow(outlet.T=333.15);
     WaterHub.EndUses.Showers.SimpleShower shower1;
@@ -19,7 +19,7 @@ package Examples
 
 
   model JouliaShower
-    extends WaterHub.Icons.Example;
+    extends Modelica.Icons.Example;
     WaterHub.Supply.WaterSupply.InfiniteSupply coldFlow(T=283.15);
     WaterHub.Supply.WaterSupply.InfiniteSupply hotFlow(T=333.15);
     WaterHub.EndUses.Showers.NotSoSimpleShower shower1;

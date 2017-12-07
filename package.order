@@ -1,6 +1,7 @@
 UserGuide
 SIUnits
 Constants
+Icons
 Examples
 EndUses
 Supply
@@ -8,4 +9,4 @@ SinksReservoirs
 PipesCarriers
 RecoverySystems
 BaseClasses
-Icons
+Hydrographs

@@ -1,14 +1,15 @@
 within WaterHub.EndUses;
 
 package Showers
+  extends Modelica.Icons.Package;
   import SI=WaterHub.SIUnits;
   import CO = WaterHub.Constants;
 
   partial model BaseShower
-    extends WaterHub.Icons.Package;
+    extends Modelica.Icons.BasesPackage;
     parameter SI.AbsoluteTemperature T_wanted = 310 "Target Temperature";
     SI.AbsoluteTemperature T_achieved "Achieved Temperature";
-    parameter SI.WaterFlow water_wanted = 0.4 "Shower Flow";  
+    parameter SI.WaterFlow water_wanted = 0.4 "Demanded Flow";  
   algorithm
     if T_wanted < inletCold.T then   //Make sure wanted T is inside the boundary set by Hot and Cold Water
       T_achieved := inletCold.T;
@@ -16,12 +17,13 @@ package Showers
       T_achieved := inletHot.T;
     else
       T_achieved := T_wanted;
-    end if;     
+    end if;
   end BaseShower;
 
 
   model SimpleShower
     extends BaseShower;
+    extends WaterHub.Icons.ModelIcon;
     SI.AbsoluteTemperature T_preheatedCold "Temperature of the preheated cold water";
 
     //inlet ports
@@ -43,6 +45,7 @@ package Showers
 
   model NotSoSimpleShower
     extends BaseShower;
+    extends WaterHub.Icons.ModelIcon;
     // inlet ports
     WaterHub.BaseClasses.WaterPort_in inletCold(water(min=0))
     annotation (Placement(transformation(extent={{-110,-30},{-90,-10}})));

@@ -1,7 +1,7 @@
 within WaterHub;
 
 package SIUnits
-
+  extends Modelica.Icons.UtilitiesPackage;
   //Lengths
 
   type Length = Real (final quantity = "Length", final unit = "m");

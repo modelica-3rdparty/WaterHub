@@ -1,7 +1,7 @@
 within WaterHub;
 package Constants
   "Library of mathematical constants and constants of nature"
-  
+  extends Modelica.Icons.UtilitiesPackage;
   import SI = WaterHub.SIUnits;
   
   // Mathematical constants

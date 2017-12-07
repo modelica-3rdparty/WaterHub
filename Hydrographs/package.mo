@@ -1,4 +1,4 @@
 within WaterHub;
-package PipesCarriers
+package Hydrographs
   extends Modelica.Icons.Package;
-end PipesCarriers;
+end Hydrographs;

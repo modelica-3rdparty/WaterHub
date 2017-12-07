@@ -3,9 +3,10 @@ within WaterHub.RecoverySystems;
 package HeatExchangers
   import SI=WaterHub.SIUnits;
   import CO=WaterHub.Constants;
-
+  extends Modelica.Icons.Package;
+  
   model SimpleHeatExchanger "Retrieves energy and direct input into SimpleShower"
-    extends WaterHub.Icons.Package;
+    extends WaterHub.Icons.ModelIcon;
     WaterHub.BaseClasses.WaterPort inlet;
     WaterHub.BaseClasses.HeatPort heat_out;
     parameter Real efficiency=0.15 "Efficiency of heat retrieval";
@@ -19,12 +20,12 @@ package HeatExchangers
 
 
   model NotSoSimpleHeatExchanger "Derived from https://en.wikipedia.org/wiki/Heat_exchanger : model of simple heat exchanger"
-    extends WaterHub.Icons.Package;
+    extends WaterHub.Icons.ModelIcon;
     annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}), graphics={
-                Line(points = {{-94.1421,94.1421},{94.1421,-94.1421}}, color = {0,0,0}),
-                Line(points = {{0,-100},{-5,-5},{-100,0}}, color = {0,0,255}, smooth=Smooth.Bezier),
-                Line(points = {{0,100},{5,5},{100,0}}, color = {208,52,43}, smooth=Smooth.Bezier)
+                Line(points = {{-92.4,92.4},{92.4,-92.4}}, color = {0,0,0}, thickness = 0.5),
+                Line(points = {{0,-100},{-5,-5},{-100,0}}, color = {0,0,255}, thickness = 1.5, smooth=Smooth.Bezier),
+                Line(points = {{0,100},{5,5},{100,0}}, color = {208,52,43}, thickness = 1.5, smooth=Smooth.Bezier)
                     }));
 
     WaterHub.BaseClasses.WaterPort_in inletHot(water(min=0.0)) annotation (Placement

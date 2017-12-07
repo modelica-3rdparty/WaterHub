@@ -1,9 +1,9 @@
 within WaterHub;
-package BaseClasses 
-  "Includes the Base Classes for the different building blocks and the interface behavior (heat, flows)"
-  
+package BaseClasses "Includes the Base Classes for the different building blocks and the interface behavior (heat, flows)"
+  extends Modelica.Icons.BasesPackage;
+
   import SI=WaterHub.SIUnits;
-  
+
   connector WaterPort
     flow SI.WaterFlow water;
     SI.AbsoluteTemperature T;
@@ -70,7 +70,7 @@ package BaseClasses
   connector HeatPort
     flow SI.HeatFlow heat;
   end HeatPort;
-  
+
   connector HeatPort_in
     extends HeatPort;
     annotation (defaultComponentName="port_in",
@@ -89,7 +89,7 @@ package BaseClasses
             extent={{-100,100},{100,-100}},
             lineColor={0,0,0},
             fillColor={208,52,5},
-            fillPattern=FillPattern.Solid)}));    
+            fillPattern=FillPattern.Solid)}));
   end HeatPort_in;
 
   connector HeatPort_out
@@ -126,5 +126,22 @@ package BaseClasses
             fillPattern=FillPattern.Solid)}));
             //, Text(extent={{-150,100},{150,200}},textString="%name")}));
   end HeatPort_out;
+
+package BaseFunctions
+  extends Modelica.Icons.Package;
+  
+  function checkIfInArray
+    extends Modelica.Icons.Function;
+    
+    input Real scal;
+    input Real array[:];
+    output Boolean bool=false;
+  algorithm
+	for i loop
+	  if scal == array[i] then bool := true; end if;
+	end for;
+  end checkIfInArray;
+
+end BaseFunctions;
 
 end BaseClasses;
