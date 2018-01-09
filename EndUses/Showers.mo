@@ -5,11 +5,10 @@ package Showers
   import SI=WaterHub.SIUnits;
   import CO = WaterHub.Constants;
 
-  partial model BaseShower
+  partial model BaseShower "A base shower model in which the basic algorithm for achieved temperature is defined"
     extends Modelica.Icons.BasesPackage;
     parameter SI.AbsoluteTemperature T_wanted = 310 "Target Temperature";
-    SI.AbsoluteTemperature T_achieved "Achieved Temperature";
-    parameter SI.WaterFlow water_wanted = 0.4 "Demanded Flow";  
+    SI.AbsoluteTemperature T_achieved "Achieved Temperature"; 
   algorithm
     if T_wanted < inletCold.T then   //Make sure wanted T is inside the boundary set by Hot and Cold Water
       T_achieved := inletCold.T;
@@ -25,6 +24,7 @@ package Showers
     extends BaseShower;
     extends WaterHub.Icons.ModelIcon;
     SI.AbsoluteTemperature T_preheatedCold "Temperature of the preheated cold water";
+    parameter SI.WaterFlow water_wanted = 0.4 "Demanded Flow"; 
 
     //inlet ports
     WaterHub.BaseClasses.HeatPort heat_in(heat(min=0));     
@@ -43,21 +43,25 @@ package Showers
   end SimpleShower;
 
 
-  model NotSoSimpleShower
+  model NotSoSimpleShower "Shower model that takes an external hydrograph as input values or demands a steady flow (water_wanted)."
     extends BaseShower;
     extends WaterHub.Icons.ModelIcon;
     // inlet ports
-    WaterHub.BaseClasses.WaterPort_in inletCold(water(min=0))
+    WaterHub.BaseClasses.WaterPort_in inletCold(water(min=-10e-5))
     annotation (Placement(transformation(extent={{-110,-30},{-90,-10}})));
-    WaterHub.BaseClasses.WaterPort_in inletHot(water(min=0))
+    WaterHub.BaseClasses.WaterPort_in inletHot(water(min=-10e-5))
     annotation (Placement(transformation(extent={{-110,10},{-90,30}})));
+    Modelica.Blocks.Interfaces.RealInput flowInput
+    annotation (Placement(transformation(extent={{-10,90},{10,110}}, rotation=-90)));
     //outlet ports
     WaterHub.BaseClasses.WaterPort_out outlet(water(max=0))
     annotation (Placement(transformation(extent={{110,-10},{90,10}})));
+
   equation
     -T_achieved*outlet.water = inletCold.T*inletCold.water+inletHot.T*inletHot.water "Energy balance";
-    inletCold.water+inletHot.water = water_wanted "Mass balance";
-    outlet.water + inletCold.water + inletHot.water = 0;
+    inletCold.water + inletHot.water = flowInput "Mass balance";
+   // inletCold.water+inletHot.water = water_wanted "Mass balance"; // if fixed flow (steady-state)
+    outlet.water + inletCold.water + inletHot.water = 0 "Flow balance";
     outlet.T = T_achieved;
 
     annotation (defaultComponentName="Shower");

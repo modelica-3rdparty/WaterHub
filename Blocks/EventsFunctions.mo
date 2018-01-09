@@ -1,4 +1,4 @@
-within WaterHub.Hydrographs;
+within WaterHub.Blocks;
 
 package EventsFunctions
   extends Modelica.Icons.Package;
