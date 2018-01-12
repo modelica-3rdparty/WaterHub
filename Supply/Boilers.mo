@@ -8,6 +8,7 @@ package Boilers
   partial model BaseBoiler
     extends Modelica.Icons.BasesPackage;
     parameter SI.AbsoluteTemperature T_wanted = 333 "Target Temperature";
+    parameter Integer n=1 "Number of ports";
 
     //inlet ports
     WaterHub.BaseClasses.HeatPort_in energy_in(heat(min=-10e-5))
@@ -15,26 +16,26 @@ package Boilers
     WaterHub.BaseClasses.WaterPort_in inlet(water(min=-10e-5))
     annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
     //outlet ports
-    WaterHub.BaseClasses.WaterPort_out outlet(water(max=10e-5))
-    annotation (Placement(transformation(extent={{90,-10},{110,10}})));
+    WaterHub.BaseClasses.WaterPorts_out[n] outlet(each water(max=10e-5))
+    annotation (Placement(transformation(extent={{90,-40},{110,40}})));
     annotation (defaultComponentName="Boiler");
   end BaseBoiler;
 
   model InstantaneousBoiler
     extends BaseBoiler;
     extends WaterHub.Icons.ModelIcon;
-    parameter SI.WaterFlow MaxFlow = 10 "Maximum Flow";
+    //parameter SI.WaterFlow MaxFlow = 10 "Maximum Flow";
 
   equation
-    outlet.water + inlet.water = 0;
-    outlet.T - T_wanted = 0;
-    outlet.T*outlet.water + inlet.T*inlet.water + energy_in.heat/CO.VolSpecificHeatCapWater = 0;
+    for i in 1:n loop
+      outlet[i].T - T_wanted = 0;
+    end for;
+    outlet.T*outlet.water + inlet.T*inlet.water + energy_in.heat/CO.VolSpecificHeatCapWater = 0 "scalar product of outlet ports temp and volume, energy balance";
+    sum(outlet.water) + inlet.water = 0 "Sum of all outlet ports and inlet mass balance";
 //    when outlet.water < -MaxFlow then
 //    outlet.water = -MaxFlow;
 //    end when;
-
   end InstantaneousBoiler;
-
 
 
   model SimpleBoiler
