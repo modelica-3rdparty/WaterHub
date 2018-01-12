@@ -25,7 +25,7 @@ package Sources
         group="Table definition",
         loadSelector(filter="Text files (*.txt);;CSV files (*.csv)",
             caption="Open file in which table is present")));
-    parameter Integer columns[:]={4}
+    parameter Integer columns[:]={2}
       "Columns of table to be interpolated, column 4 is default"
       annotation (Dialog(group="Table data interpretation"));
     parameter Modelica.Blocks.Types.Smoothness smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments
