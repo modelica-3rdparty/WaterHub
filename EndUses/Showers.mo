@@ -23,16 +23,6 @@ package Showers
   model ClassicShower "Shower model that takes an external hydrograph as input values or demands a steady flow (water_wanted)."
     extends BaseShower;
     extends WaterHub.EndUses.BaseEndUses.BasicComponents;
-    // inlet ports
-//    WaterHub.BaseClasses.WaterPort_in inletCold(water(min=-10e-5))
-//    annotation (Placement(transformation(extent={{-110,-30},{-90,-10}})));
-//    WaterHub.BaseClasses.WaterPort_in inletHot(water(min=-10e-5))
-//    annotation (Placement(transformation(extent={{-110,10},{-90,30}})));
-//    Modelica.Blocks.Interfaces.RealInput flowInput
-//    annotation (Placement(transformation(extent={{-10,90},{10,110}}, rotation=-90)));
-//    //outlet ports
-//    WaterHub.BaseClasses.WaterPort_out outlet(water(max=0))
-//    annotation (Placement(transformation(extent={{110,-10},{90,10}})));
 
   equation
     -T_achieved*outlet.water = inletCold.T*inletCold.water+inletHot.T*inletHot.water "Energy balance";

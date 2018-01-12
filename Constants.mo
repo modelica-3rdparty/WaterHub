@@ -24,4 +24,13 @@ package Constants
   final constant Real epsilon_0(final unit="F/m") = 1/(mue_0*c*c) "Electric constant";
   final constant Real VolSpecificHeatCapWater(final unit="J/L*K") = 4179.6 "Volumetric Specific Heat of Water";
 
+package MaterialConstants
+  type Material = enumeration(
+    Copper,
+    Steel,
+    Lead
+  ) "Enumeration of different materials to choose from";
+end MaterialConstants;
+
+
 end Constants;

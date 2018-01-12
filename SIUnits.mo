@@ -6,6 +6,8 @@ package SIUnits
 
   type Length = Real (final quantity = "Length", final unit = "m");
   type PipeLength = Length(min=0);
+  type PipeDiameter = Length(min=0);
+  type PipeThickness = Length(min=0);
   type Velocity = Real (final quantity = "Velocity", final unit = "m/s");
   type Acceleration = Real (final quantity = "Acceleration", final unit = "m/s2");
   
