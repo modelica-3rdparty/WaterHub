@@ -226,6 +226,41 @@ package BaseClasses "Includes the Base Classes for the different building blocks
             fillPattern=FillPattern.Solid)}));
   end HeatPort_in;
 
+  connector HeatPort_out
+    extends HeatPort;
+    annotation (defaultComponentName="port_out",
+                Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+              -100},{100,100}}), graphics={
+          Ellipse(
+            extent={{-40,40},{40,-40}},
+            lineColor={0,0,0},
+            fillColor={208,52,5},
+            fillPattern=FillPattern.Solid),
+          Ellipse(
+            extent={{-30,30},{30,-30}},
+            lineColor={0,127,255},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid)}),
+         Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
+              100,100}}), graphics={
+          Ellipse(
+            extent={{-100,100},{100,-100}},
+            lineColor={208,52,5},
+            fillColor={208,52,5},
+            fillPattern=FillPattern.Solid),
+          Ellipse(
+            extent={{-100,100},{100,-100}},
+            lineColor={0,0,0},
+            fillColor={208,52,5},
+            fillPattern=FillPattern.Solid),
+          Ellipse(
+            extent={{-80,80},{80,-80}},
+            lineColor={208,52,5},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid)}));
+            //, Text(extent={{-150,100},{150,200}},textString="%name")}));
+  end HeatPort_out;
+
   connector HeatPorts_in
     extends HeatPort;
     annotation (defaultComponentName="heatPorts_in",

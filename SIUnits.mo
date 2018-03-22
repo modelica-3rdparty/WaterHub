@@ -24,6 +24,7 @@ package SIUnits
   type Mass = Real (final quantity = "Mass", final unit = "kg");
   type MassFlow = Real (final quantity = "Mass Flow", final unit = "kg/s");
   type Volume = Real (final quantity = "Volume", final unit = "L");
+  type Area = Real (final quantity = "Area", final unit = "m2");
   type VolumeFlow = Real (final quantity = "Volume Flow", final unit = "L/s");
   type Density = Real (final quantity = "Density", final unit = "kg/m3");
   type WaterFlow = Real (final quantity = "Water Flow", final unit = "L/s");
@@ -44,8 +45,9 @@ package SIUnits
 				    final unit="W/m2");
   type CoefficientOfHeatTransfer = Real (final quantity="CoefficientOfHeatTransfer",
 					 final unit="W/(m2.K)");
-  type ThermalConductivity = Real (final quantity="ThermalConductivity",
+  type ThermalConductivity = Real (final quantity="Thermal Conductivity",
 				   final unit="W/(m.K)");
+  type OverallConductance = Real (final quantity="Overall Thermal Conductance", final unit = "W/K");
 
 
 end SIUnits;

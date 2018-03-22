@@ -7,7 +7,7 @@ package WaterPipes
   import CO = WaterHub.Constants;
   
   
-model Pipe "Inspired by Modelica.Fluid.Pipes"
+model PipeLossesAtRest "Inspired by Modelica.Fluid.Pipes"
   annotation (defaultComponentName="pipe",Icon(coordinateSystem(
       preserveAspectRatio=false,
       extent={{-100,-100},{100,100}}), graphics={Rectangle(
@@ -21,10 +21,10 @@ model Pipe "Inspired by Modelica.Fluid.Pipes"
         fillColor={0,127,255})}));
   
   //parameters
-  parameter Real triggerValue=1e-2 "Real value triggering the modeling of heat losses";
-  parameter SI.PipeLength pipeLength=10;
-  parameter SI.PipeDiameter pipeDiameter=0.1;
-  parameter SI.PipeThickness pipeThickness=0.01;
+  parameter Real triggerValue=1e-2 "Real value triggering the modeling of heat losses when flow crosses that value";
+  parameter SI.PipeLength pipeLength=29;
+  parameter SI.PipeDiameter pipeDiameterInside=0.0127;
+  parameter SI.PipeThickness pipeThickness=0.00375;
   parameter CO.MaterialConstants.Material material=CO.MaterialConstants.Material.Copper;
   
   //inlets
@@ -33,37 +33,52 @@ model Pipe "Inspired by Modelica.Fluid.Pipes"
   //outlets
   WaterHub.BaseClasses.WaterPort_out outlet(water(max=1e-5))
   annotation (Placement(transformation(extent={{110,-10},{90,10}})));
+  WaterHub.BaseClasses.HeatPort_out heatOutlet "to be connected to heat sink"
+  annotation (Placement(transformation(extent={{-10, -45},{10, -25}})));
 
-protected  
+//protected  
   SI.Volume volume;
-  SI.CoefficientOfHeatTransfer h;
+  SI.Area areaInside;
+  SI.Area areaOutside;
+//  SI.CoefficientOfHeatTransfer h;
   SI.ThermalConductivity k;
-  Real timeTmp(start=0);
-  parameter SI.AbsoluteTemperature tEnvironment = 290;
+  parameter SI.AbsoluteTemperature tEnvironment = 293.15;
+  SI.OverallConductance UA;
   
 algorithm
-  volume := pipeLength*CO.pi*(pipeDiameter/2)^2;
   if material == CO.MaterialConstants.Material.Copper then
-    h := 13.1 "for water-copper-air system";
-    k := 399.0;
+//    h := 13.1 "for water-copper-air system";
+    k := 385.0;
   else
-    h := 0.0;
+//    h := 0.0;
     k := 0.0; //not implemented for other materials
   end if;
-  when inlet.water < triggerValue then
-  timeTmp := time;
-  end when;
+
+  volume := pipeLength*CO.pi*(pipeDiameterInside/2)^2*1e3 "Volume in Liters";
+  areaInside := CO.pi*pipeDiameterInside*pipeLength;
+  areaOutside := CO.pi*(pipeDiameterInside+pipeThickness)*pipeLength;
+  
+initial equation
+  outlet.T = inlet.T;
 
 equation
-  inlet.water + outlet.water = 0;
-  
-  if inlet.water < triggerValue then
-    outlet.T = inlet.T*exp(-(time-timeTmp)*0.0001);
-  else
-    outlet.T = inlet.T;
-  end if;
+  1./UA = 1./(CO.hConvWater*areaInside) + pipeThickness/(k*((areaInside+areaOutside)/2)) + 1./(CO.hConvAir*areaOutside);
 
-end Pipe;
+  inlet.water + outlet.water = 0;
+
+  when inlet.water > triggerValue then
+    reinit(outlet.T, inlet.T);
+  end when;
+
+  if inlet.water > triggerValue then
+    der(outlet.T) = 0;
+  else
+    CO.VolSpecificHeatCapWater*volume*der(outlet.T) = -UA*(outlet.T-tEnvironment);
+  end if;
+  
+  CO.VolSpecificHeatCapWater*volume*der(outlet.T) = heatOutlet.heat;
+  
+end PipeLossesAtRest;
   
   
   

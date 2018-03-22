@@ -11,15 +11,16 @@ package Boilers
     parameter Integer n=1 "Number of ports";
 
     //inlet ports
-    WaterHub.BaseClasses.HeatPort_in energy_in(heat(min=-10e-5))
+    WaterHub.BaseClasses.HeatPort_in energy_in(heat(min=-1e-5))
     annotation (Placement(transformation(extent={{-10,90},{10,110}})));
     WaterHub.BaseClasses.WaterPort_in inlet(water(min=-10e-5))
     annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
     //outlet ports
-    WaterHub.BaseClasses.WaterPorts_out[n] outlet(each water(max=10e-5))
+    WaterHub.BaseClasses.WaterPorts_out[n] outlet(each water(max=1e-5))
     annotation (Placement(transformation(extent={{90,-40},{110,40}})));
     annotation (defaultComponentName="Boiler");
   end BaseBoiler;
+
 
   model InstantaneousBoiler
     extends BaseBoiler;

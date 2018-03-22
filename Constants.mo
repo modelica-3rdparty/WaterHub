@@ -32,5 +32,8 @@ package MaterialConstants
   ) "Enumeration of different materials to choose from";
 end MaterialConstants;
 
+  //thermal coefficients
+  final constant SI.CoefficientOfHeatTransfer hConvWater = 1000 "Convection heat transfer coefficient of water";
+  final constant SI.CoefficientOfHeatTransfer hConvAir = 30 "Convection heat transfer coefficient of water";
 
 end Constants;
