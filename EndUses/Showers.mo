@@ -20,9 +20,9 @@ package Showers
   end BaseShower;
 
 
-  model ClassicShower "Shower model that takes an external hydrograph as input values or demands a steady flow (water_wanted)."
+  model ClassicShower "Shower model that takes an external hydrograph as input values"
     extends BaseShower;
-    extends WaterHub.EndUses.BaseEndUses.BasicComponents;
+    extends WaterHub.EndUses.BaseEndUses.BasicValve;
 
   equation
     -T_achieved*outlet.water = inletCold.T*inletCold.water+inletHot.T*inletHot.water "Energy balance";

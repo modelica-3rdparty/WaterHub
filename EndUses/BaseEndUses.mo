@@ -3,7 +3,7 @@ within WaterHub.EndUses;
 package BaseEndUses
   extends Modelica.Icons.Package;
 
-  partial model BasicComponents "partial model that has two water inlets (hot, cold), one outlet and one data input connector"
+  partial model BasicValve "partial model that has two water inlets (hot, cold), one outlet and one data input connector"
     extends WaterHub.Icons.ModelIcon;
 
     //inlet ports
@@ -18,7 +18,7 @@ package BaseEndUses
     WaterHub.BaseClasses.WaterPort_out outlet(water(max=0))
     annotation (Placement(transformation(extent={{110,-10},{90,10}})));
 
-  end BasicComponents;
+  end BasicValve;
 
 
 end BaseEndUses;

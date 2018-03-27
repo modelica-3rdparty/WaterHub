@@ -6,7 +6,7 @@ package Taps
   import CO = WaterHub.Constants;
 
   model ClassicTap
-    extends WaterHub.EndUses.BaseEndUses.BasicComponents;
+    extends WaterHub.EndUses.BaseEndUses.BasicValve;
     parameter SI.AbsoluteTemperature T_wanted = 310 "Target Temperature";
     SI.AbsoluteTemperature T_achieved "Achieved Temperature";
   

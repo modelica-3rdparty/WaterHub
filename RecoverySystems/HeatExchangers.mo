@@ -7,15 +7,16 @@ package HeatExchangers
   
   model SimpleHeatExchanger "Retrieves energy and direct input into SimpleShower"
     extends WaterHub.Icons.ModelIcon;
-    WaterHub.BaseClasses.WaterPort inlet;
-    WaterHub.BaseClasses.HeatPort heat_out;
+    WaterHub.BaseClasses.WaterPort_in inlet;
+    WaterHub.BaseClasses.WaterPort_out outlet;
+    WaterHub.BaseClasses.HeatPort_out heatOutlet;
     parameter Real efficiency=0.15 "Efficiency of heat retrieval";
     SI.HeatFlow heat_in;
-    SI.AbsoluteTemperature T_out;
   equation
+    inlet.water + outlet.water = 0;
     heat_in = CO.VolSpecificHeatCapWater*inlet.T*inlet.water;
-    -heat_out.heat = efficiency*heat_in;
-    T_out = ((1-efficiency)*heat_in)/(inlet.water*CO.VolSpecificHeatCapWater);
+    -heatOutlet.heat = efficiency*heat_in;
+    outlet.T = ((1-efficiency)*heat_in)/(outlet.water*CO.VolSpecificHeatCapWater);
   end SimpleHeatExchanger;
 
 
